@@ -1,14 +1,12 @@
 package serialAbelianSandpile;
 
-import serialAbelianSandpile.Grid;
-import serialAbelianSandpile.AutomatonSimulation;
 import java.io.IOException;
-import java.util.concurrent.ForkJoinPool;
+import serialAbelianSandpile.AutomatonSimulation;
+import serialAbelianSandpile.Grid;
 
-public class ParallelAutomatonSimulation {
-    //static final boolean FLAG = false;
-	static final boolean DEBUG=false;//for debugging output, off
+public class ParallelAutomatonSimulation extends AutomatonSimulation {
 
+	//time
 	static long startTime = 0;
 	static long endTime = 0;
 
@@ -19,36 +17,38 @@ public class ParallelAutomatonSimulation {
 	private static void tock(){ //end timing
 		endTime=System.currentTimeMillis(); 
 	}
-   
-    public static void main(String[] args) throws IOException, InterruptedException{
+	//time
 
-    	if (args.length!=2) {   //input is the name of the input and output files
-    		System.out.println("Incorrect number of command line arguments provided.");   	
-    		System.exit(0);
-    	}
+    public static void main(String[] args) throws IOException {
+        Grid simulationGrid;
 
-		String inputFileName = args[0];
+        if (args.length != 2) {
+            System.out.println("Incorrect number of command line arguments provided.");
+            System.exit(0);
+        }
+
+        String inputFileName = args[0];
         String outputFileName = args[1];
 
-		Grid simulationGrid = new Grid(AutomatonSimulation.readArrayFromCSV(inputFileName));
+        simulationGrid = new ParallelGrid(readArrayFromCSV(inputFileName));
 
-        final ForkJoinPool forkPool = new ForkJoinPool();
-        int numThds = 0;
-		int numRows = simulationGrid.getRows();
+        int counter = 0;
+        tick();
+        if (DEBUG) {
+            System.out.printf("starting config: %d \n", counter);
+            simulationGrid.printGrid();
+        }
+        while (simulationGrid.update()) {
+            if (DEBUG) simulationGrid.printGrid();
+            counter++;
+        }
+        tock();
 
-
-		tick();
-
-		forkPool.invoke(new ParallelGrid(simulationGrid, 0, numRows));
-		
-		tock();; // End timer
-
-        // Output the results
         System.out.println("Simulation complete, writing image...");
         simulationGrid.gridToImage(outputFileName);
-        System.out.printf("\t Rows: %d, Columns: %d\n", simulationGrid.getRows(), simulationGrid.getColumns());
-        System.out.printf("Number of steps to stable state: %d \n", numThds);
-        System.out.printf("Time: %d ms\n", AutomatonSimulation.endTime - AutomatonSimulation.startTime);
-    }
 
+        System.out.printf("Number of steps to stable state: %d \n", counter);
+        System.out.printf("Time: %d ms\n", endTime - startTime);
+    }
 }
+

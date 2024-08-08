@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 //This class is for the grid for the Abelian Sandpile cellular automaton
 public class Grid {
 	private int rows, columns;
-	private int [][] grid; //grid 
+	public int [][] grid; //grid 
 	public int [][] updateGrid;//grid for next time step
     
 	public Grid(int w, int h) {
