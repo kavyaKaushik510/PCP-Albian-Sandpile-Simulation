@@ -7,7 +7,7 @@ import java.util.concurrent.ForkJoinPool;
 
 class ParallelGrid extends Grid{
 
-    private static final int THRESHOLD = 100;
+    private static final int THRESHOLD = 60;
 
     //private int firstRow, rowCount, columnCount;
     //private Grid grid;
@@ -27,8 +27,10 @@ class ParallelGrid extends Grid{
 
     @Override
     public boolean update() {
+        
         ForkJoinPool pool = new ForkJoinPool();
         boolean result = pool.invoke(new UpdateTask(1, getRows()));
+
         pool.shutdown();
         if (result) {
             nextTimeStep();
@@ -69,7 +71,7 @@ class ParallelGrid extends Grid{
     private boolean updateRows() {
         boolean change = false;
         for (int i = startRow; i <= endRow; i++) {
-            for (int j = 1; j < getColumns() + 1; j++) {
+            for (int j = 1; j < getColumns(); j++) {
                 updateGrid[i][j] = (grid[i][j] % 4) +
                         (grid[i - 1][j] / 4) +
                         (grid[i + 1][j] / 4) +

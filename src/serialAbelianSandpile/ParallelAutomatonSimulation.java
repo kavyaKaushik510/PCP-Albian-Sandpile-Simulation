@@ -31,7 +31,6 @@ public class ParallelAutomatonSimulation extends AutomatonSimulation {
         String outputFileName = args[1];
 
         simulationGrid = new ParallelGrid(readArrayFromCSV(inputFileName));
-
         int counter = 0;
         tick();
         if (DEBUG) {
