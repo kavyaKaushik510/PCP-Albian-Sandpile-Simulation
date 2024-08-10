@@ -29,19 +29,19 @@ public class ParallelAutomatonSimulation extends AutomatonSimulation {
         Grid simulationGrid = new ParallelGrid(readArrayFromCSV(inputFileName));
 
         // Create the ForkJoinPool once in the simulation class
-        ForkJoinPool pool = new ForkJoinPool();
+        //ForkJoinPool pool = new ForkJoinPool();
 
         int counter = 0;
         tick();
 
 
         // Use the same pool for all updates
-        while (((ParallelGrid) simulationGrid).update(pool)) {
+        while (simulationGrid.update()) {
             counter++;
         }
         tock();
 
-        pool.shutdown(); // Shutdown the pool when done
+        //pool.shutdown(); // Shutdown the pool when done
 
         System.out.println("Simulation complete, writing image...");
         simulationGrid.gridToImage(outputFileName);

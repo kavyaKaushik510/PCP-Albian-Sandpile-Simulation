@@ -5,7 +5,7 @@ import java.util.concurrent.ForkJoinPool;
 
 public class ParallelGrid extends Grid {
 
-    private static final int THRESHOLD = 1500;
+    private static final int THRESHOLD = 3000;
 
     public ParallelGrid(int w, int h) {
         super(w, h);
@@ -19,8 +19,11 @@ public class ParallelGrid extends Grid {
         super(copyGrid);
     }
 
-    public boolean update(ForkJoinPool pool) {
-        boolean result = pool.invoke(new UpdateTask(1, 1, getRows(), getColumns()));
+    @Override
+    public boolean update() {
+        // Use the common ForkJoinPool instead of creating a new one
+        boolean result = ForkJoinPool.commonPool().invoke(new UpdateTask(1, 1, getRows(), getColumns()));
+        
         if (result) {
             nextTimeStep();
         }
