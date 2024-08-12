@@ -6,24 +6,30 @@ import java.util.concurrent.ForkJoinPool;
 public class ParallelGrid extends Grid {
 
     private static final int THRESHOLD = 3000;
+    //extra
+    ForkJoinPool pool;
 
-    public ParallelGrid(int w, int h) {
+    public ParallelGrid(int w, int h, ForkJoinPool pool) {
         super(w, h);
+        this.pool = pool;
     }
 
-    public ParallelGrid(int[][] newGrid) {
+    public ParallelGrid(int[][] newGrid, ForkJoinPool pool) {
         super(newGrid);
+        this.pool = pool;
     }
 
-    public ParallelGrid(Grid copyGrid) {
+    public ParallelGrid(Grid copyGrid, ForkJoinPool pool) {
         super(copyGrid);
+        this.pool = pool;
     }
 
-    @Override
+  //  @Override
     public boolean update() {
         // Use the common ForkJoinPool instead of creating a new one
-        boolean result = ForkJoinPool.commonPool().invoke(new UpdateTask(1, 1, getRows(), getColumns()));
-        
+    boolean result = pool.invoke(new UpdateTask(1, 1, getRows(), getColumns()));
+    //ForkJoinPool customPool = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
+       
         if (result) {
             swapGrids();
         }
