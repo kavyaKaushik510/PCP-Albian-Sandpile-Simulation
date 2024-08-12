@@ -96,6 +96,12 @@ public class Grid {
 	return change;
 	}
 
+	public void swapGrids() {
+        int[][] temp = grid;
+        grid = updateGrid;
+        updateGrid = temp;
+    }
+
 	//display the grid in text format
 	void printGrid( ) {
 		int i,j;

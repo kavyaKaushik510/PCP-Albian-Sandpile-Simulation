@@ -25,7 +25,7 @@ public class ParallelGrid extends Grid {
         boolean result = ForkJoinPool.commonPool().invoke(new UpdateTask(1, 1, getRows(), getColumns()));
         
         if (result) {
-            nextTimeStep();
+            swapGrids();
         }
         return result;
     }
