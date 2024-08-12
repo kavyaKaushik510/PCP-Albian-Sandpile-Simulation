@@ -5,45 +5,57 @@ import java.util.concurrent.ForkJoinPool;
 
 public class ParallelGrid extends Grid {
 
-    private static final int THRESHOLD = 3000;
+   // private static final int THRESHOLD = 3000;
+    private static final int BASE_THRESHOLD = 3000;
     //extra
-    ForkJoinPool pool;
+   // ForkJoinPool pool;
 
-    public ParallelGrid(int w, int h, ForkJoinPool pool) {
+    public ParallelGrid(int w, int h) {
         super(w, h);
-        this.pool = pool;
+        //this.pool = pool;
     }
 
-    public ParallelGrid(int[][] newGrid, ForkJoinPool pool) {
+    public ParallelGrid(int[][] newGrid) {
         super(newGrid);
-        this.pool = pool;
+        //this.pool = pool;
     }
 
-    public ParallelGrid(Grid copyGrid, ForkJoinPool pool) {
+    public ParallelGrid(Grid copyGrid) {
         super(copyGrid);
-        this.pool = pool;
+        //this.pool = pool;
     }
 
   //  @Override
     public boolean update() {
         // Use the common ForkJoinPool instead of creating a new one
-    boolean result = pool.invoke(new UpdateTask(1, 1, getRows(), getColumns()));
+    //boolean result = pool.invoke(new UpdateTask(1, 1, getRows(), getColumns()));
     //ForkJoinPool customPool = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
-       
+    int threshold = calculateThreshold(getRows(), getColumns());   
+    boolean result = ForkJoinPool.commonPool().invoke(new UpdateTask(1, 1, getRows(), getColumns(), threshold));
+
         if (result) {
             swapGrids();
         }
         return result;
     }
 
+    private int calculateThreshold(int rows, int cols) {
+        // Adjust the threshold dynamically based on the grid size.
+        // For example, set the threshold to be a function of the total number of cells
+        int totalCells = rows * cols;
+        return Math.max(BASE_THRESHOLD, totalCells / 100); // Example adjustment
+    }
+
     private class UpdateTask extends RecursiveTask<Boolean> {
         int startRow, startCol, endRow, endCol;
+        int threshold;
 
-        UpdateTask(int startRow, int startCol, int endRow, int endCol) {
+        UpdateTask(int startRow, int startCol, int endRow, int endCol, int threshold) {
             this.startRow = startRow;
             this.startCol = startCol;
             this.endRow = endRow;
             this.endCol = endCol;
+            this.threshold = threshold;
         }
 
         @Override
@@ -51,16 +63,16 @@ public class ParallelGrid extends Grid {
             int rows = endRow - startRow + 1;
             int cols = endCol - startCol + 1;
 
-            if (rows * cols <= THRESHOLD) {
+            if (rows * cols <= threshold) {
                 return updateSegment();
             } else {
                 int midRow = (startRow + endRow) / 2;
                 int midCol = (startCol + endCol) / 2;
 
-                UpdateTask task1 = new UpdateTask(startRow, startCol, midRow, midCol);
-                UpdateTask task2 = new UpdateTask(startRow, midCol + 1, midRow, endCol);
-                UpdateTask task3 = new UpdateTask(midRow + 1, startCol, endRow, midCol);
-                UpdateTask task4 = new UpdateTask(midRow + 1, midCol + 1, endRow, endCol);
+                UpdateTask task1 = new UpdateTask(startRow, startCol, midRow, midCol, threshold);
+                UpdateTask task2 = new UpdateTask(startRow, midCol + 1, midRow, endCol, threshold);
+                UpdateTask task3 = new UpdateTask(midRow + 1, startCol, endRow, midCol, threshold);
+                UpdateTask task4 = new UpdateTask(midRow + 1, midCol + 1, endRow, endCol, threshold);
 
                 task1.fork();
                 task2.fork();

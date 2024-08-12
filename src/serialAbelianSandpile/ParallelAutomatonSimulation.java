@@ -25,10 +25,10 @@ public class ParallelAutomatonSimulation extends AutomatonSimulation {
         String inputFileName = args[0];
         String outputFileName = args[1];
 
-        ForkJoinPool customPool = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
+       // ForkJoinPool customPool = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
 
         // Initialize the grid
-        Grid simulationGrid = new ParallelGrid(readArrayFromCSV(inputFileName), customPool);
+        Grid simulationGrid = new ParallelGrid(readArrayFromCSV(inputFileName));
 
         // Create the ForkJoinPool once in the simulation class
         //ForkJoinPool pool = new ForkJoinPool();
