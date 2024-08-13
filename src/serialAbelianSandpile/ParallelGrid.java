@@ -6,7 +6,7 @@ import java.util.concurrent.ForkJoinPool;
 public class ParallelGrid extends Grid {
 
    // private static final int THRESHOLD = 3000;
-    private static final int BASE_THRESHOLD = 3000;
+   // private static final int BASE_THRESHOLD = 3000;
     //extra
    // ForkJoinPool pool;
 
@@ -43,7 +43,12 @@ public class ParallelGrid extends Grid {
         // Adjust the threshold dynamically based on the grid size.
         // For example, set the threshold to be a function of the total number of cells
         int totalCells = rows * cols;
-        return Math.max(BASE_THRESHOLD, totalCells / 100); // Example adjustment
+        //
+        if (totalCells < 4096){
+            return totalCells/2;
+        }
+        //(int) Math.round( totalCells / 1.5); 
+        return  totalCells/10 ; // Example adjustment
     }
 
     private class UpdateTask extends RecursiveTask<Boolean> {
