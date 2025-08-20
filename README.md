@@ -34,6 +34,5 @@ The simulation reads the initial grid from a CSV file, uses Java’s Fork/Join f
 
 - Java
 - Fork/Join Framework
-- ImageIO (for PNG output)
 - Standard I/O and CSV parsing libraries
 
