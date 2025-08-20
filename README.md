@@ -1,12 +1,39 @@
-# Parallel and Concurrent Programming_Abelian-Sandpile
-The problem outlined in this assignment is that of a two-dimensional cellular automaton called an Abelian Sandpile. This automation is a grid where each cell contains values representing “grains of sand”. When the number of grains in a cell exceeds 4, in the next time step the cell distributes the grains evenly to the neighbouring cells. The border around a grid is called a “sink”.
+# Parallel Abelian Sandpile Simulation
 
+This project implements a parallel simulation of the Abelian Sandpile — a two-dimensional cellular automaton in which each cell contains grains of sand. When a cell accumulates more than 4 grains, it topples, distributing one grain to each of its four orthogonal neighbors. This process repeats until a stable configuration is reached.
 
-A starting configuration is created of the Abelian Sandpile where each cell is given a value and it is changed based on the logic described until it reaches a stable state where the grains in each cell are less than 4. The final state is represented by different colours for different values in the cell (black for 0, green for 1, blue for 2 and red for 3). The serial program to simulate this has been provided in the Grid and AutomatonSimulation classes.
-This assignment aims to develop a parallel solution for the problem. The parallel solution is required to achieve the following:
+The simulation reads the initial grid from a CSV file, uses Java’s Fork/Join framework for parallelization, and generates a PNG image that visually represents the final stable state.
 
-*	Runs faster than the serial solution to solve the slow runtime especially when larger grids are processed.
-*	Avoid all data races 
-*	Only utilise the fork/join framework for synchronisation.
-*	Provide accurate outputs from the specified input format (.csv files) and validate the output(.png images).
-*	The solution must be run on at least two machines and the outputs must be thoroughly evaluated. 
+---
+
+## Objectives
+
+- Develop a parallel version of the Abelian Sandpile simulation
+- Achieve faster runtimes than the provided serial solution
+- Avoid all data races and unsafe concurrent access
+- Use only the Java Fork/Join framework for synchronization
+- Validate outputs by comparing with the serial implementation
+- Run the solution on at least two machines to evaluate portability and performance
+
+---
+
+## Features
+
+- Reads sandpile configurations from `.csv` input files
+- Simulates toppling behavior based on Abelian Sandpile rules
+- Applies parallel processing using ForkJoin tasks
+- Generates output images where each color represents a specific grain count:
+  - 0 grains: Black
+  - 1 grain: Green
+  - 2 grains: Blue
+  - 3 grains: Red
+
+---
+
+## Technologies Used
+
+- Java
+- Fork/Join Framework
+- ImageIO (for PNG output)
+- Standard I/O and CSV parsing libraries
+
