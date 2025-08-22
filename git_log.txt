@@ -1,0 +1,18 @@
+0000000000000000000000000000000000000000 7ebf09e414cd68fc9ca963cf62439c83dce814a2 Kavya Kaushik <kavyaashi10@gmail.com> 1722956074 +0200	commit (initial): First commit
+7ebf09e414cd68fc9ca963cf62439c83dce814a2 7ebf09e414cd68fc9ca963cf62439c83dce814a2 Kavya Kaushik <kavyaashi10@gmail.com> 1722956361 +0200	checkout: moving from main to Parallel_1
+7ebf09e414cd68fc9ca963cf62439c83dce814a2 cae31b7cc06525be246f3908fc82e6a9ca66ca58 Kavya Kaushik <kavyaashi10@gmail.com> 1722966144 +0200	commit: Add parallel grid class
+cae31b7cc06525be246f3908fc82e6a9ca66ca58 183ae4c48a14ee85f30fc51f6b5ede86385d217d Kavya Kaushik <kavyaashi10@gmail.com> 1722966719 +0200	commit: Parallel algorithms updated on Parakllel grid
+183ae4c48a14ee85f30fc51f6b5ede86385d217d fa0fabc79a158f2e45e1b603a612f57cba697e63 Kavya Kaushik <kavyaashi10@gmail.com> 1723042148 +0200	commit: Parallel algorithm for rows structure changed
+fa0fabc79a158f2e45e1b603a612f57cba697e63 a6966566fca166fdb20ae37826cba8a4c2bd19e4 Kavya Kaushik <kavyaashi10@gmail.com> 1723119390 +0200	commit: - Working slow parallel algorithm
+a6966566fca166fdb20ae37826cba8a4c2bd19e4 7284048657ebe46c4865933f19156b01aad3e901 Kavya Kaushik <kavyaashi10@gmail.com> 1723121681 +0200	commit: - Different threhold implementations
+7284048657ebe46c4865933f19156b01aad3e901 e9f642d6c03f557aba74addcaf14a3d82a77ea51 Kavya Kaushik <kavyaashi10@gmail.com> 1723208408 +0200	commit: - final working slow
+e9f642d6c03f557aba74addcaf14a3d82a77ea51 bfeffaaacefb4c688ed37eba25b5b36ab5b73b33 Kavya Kaushik <kavyaashi10@gmail.com> 1723278185 +0200	commit: - Debugging parallel automaton
+bfeffaaacefb4c688ed37eba25b5b36ab5b73b33 6264e66fe62fbe9a95c48424ec8c3ceacd46c945 Kavya Kaushik <kavyaashi10@gmail.com> 1723282508 +0200	commit: ForJoin pool changes; larger speedup
+6264e66fe62fbe9a95c48424ec8c3ceacd46c945 a9a4da6bda3c1f4f03d4da2b96da8e6a315ae066 Kavya Kaushik <kavyaashi10@gmail.com> 1723289532 +0200	commit: - Imporved forkjoin pool implementation
+a9a4da6bda3c1f4f03d4da2b96da8e6a315ae066 e45c2224489d9833cb10a58307fd56c5ce19f221 Kavya Kaushik <kavyaashi10@gmail.com> 1723290111 +0200	commit: Implementing a common pool
+e45c2224489d9833cb10a58307fd56c5ce19f221 c3383b7ac97369a934c1fd63a96b386bb1124ece Kavya Kaushik <kavyaashi10@gmail.com> 1723454996 +0200	commit: - speedup1.1 acheived
+c3383b7ac97369a934c1fd63a96b386bb1124ece 1a3549fb7aef83f5aae6b2d4187759f1641d3df9 Kavya Kaushik <kavyaashi10@gmail.com> 1723455964 +0200	commit: - swap grid implementation for updates
+1a3549fb7aef83f5aae6b2d4187759f1641d3df9 0c1575a23f44947ef75e7c02bf672c54c271150d Kavya Kaushik <kavyaashi10@gmail.com> 1723463286 +0200	commit: Custom pool usage
+0c1575a23f44947ef75e7c02bf672c54c271150d a994e722faf2d67199bd53b3b388e0fe5c6a8523 Kavya Kaushik <kavyaashi10@gmail.com> 1723485785 +0200	commit: Variable Threshold
+a994e722faf2d67199bd53b3b388e0fe5c6a8523 bddd3328d1e51d5e98f0367ac6f9d7fa7fe7e415 Kavya Kaushik <kavyaashi10@gmail.com> 1723559968 +0200	commit: Final sequential Threshold algorithm
+bddd3328d1e51d5e98f0367ac6f9d7fa7fe7e415 3d9f757c1a3c2204ca95071cd538858fbc5ba0be Kavya Kaushik <kavyaashi10@gmail.com> 1723631001 +0200	commit: Code cleanup and citation
